@@ -1,5 +1,10 @@
+require 'warrior'
+
 class Player
-  def play_turn(warrior)
-    warrior.feel.empty? ? warrior.walk! : warrior.attack!
+
+  def play_turn warrior
+    @warrior = Warrior.new
+    @warrior.go warrior
   end
+
 end

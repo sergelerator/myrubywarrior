@@ -1,19 +1,34 @@
-Level 3
+Level 9
 
-The air feels thicker than before. There must be a horde of sludge.
+Time to hone your skills and apply all of the abilities that you have learned.
 
-Tip: Be careful not to die! Use warrior.health to keep an eye on your health, and warrior.rest! to earn 10% of max health back.
+Tip: Watch your back.
 
- ---------
-|@ s ss s>|
- ---------
+ -----------
+|>Ca  @ S wC|
+ -----------
 
   > = Stairs
   @ = Serge (20 HP)
-  s = Sludge (12 HP)
+  C = Captive (1 HP)
+  a = Archer (7 HP)
+  S = Thick Sludge (24 HP)
+  w = Wizard (3 HP)
 
 
 Warrior Abilities:
+
+  warrior.look
+    Returns an array of up to three Spaces in the given direction (forward by default).
+
+  warrior.shoot!
+    Shoot your bow & arrow in given direction (forward by default).
+
+  warrior.pivot!
+    Rotate :left, :right or :backward (default)
+
+  warrior.rescue!
+    Rescue a captive from his chains (earning 20 points) in given direction (forward by default).
 
   warrior.health
     Returns an integer representing your health.
