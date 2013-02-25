@@ -10,17 +10,20 @@ class Warrior
   end
 
   def method_missing meth, *args, &b
-    this.send(meth, *args, &b)
+    this.method(meth).call(*args, &b)
   end
 
   def go warrior
     @this = warrior
 
     if dead_end? then pivot!
-    elsif enemy_on_sight? and not under_attack? then shoot!
+    elsif captive_behind? then (feel(:backward).empty? ? walk!(:backward) : rescue!(:backward))
+    elsif danger_behind? and feel.empty? then walk!
+    elsif enemy_on_sight? and feel.empty? then shoot!
     elsif should_retreat? then retreat!
-    elsif should_rest? then rest!
     elsif should_rescue? then rescue_captive!
+    elsif stairs_on_sight? then walk!
+    elsif should_rest? then rest!
     else charge!
     end
 
