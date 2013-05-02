@@ -3,38 +3,50 @@ module Senses
   # ============================================================================
   # Senses data
   # ============================================================================
-  MaxHealth = 20
-
+  MAX_HEALTH = 20
+  DIRECTIONS = [:forward, :right, :backward, :left]
 
   # ============================================================================
   # Health related senses
   # ============================================================================
 
   def damaged?
-    health < MaxHealth
+    health < MAX_HEALTH
   end
 
   def scratched?
-    health < (MaxHealth * 0.80)
+    health < (MAX_HEALTH * 0.80)
   end
 
   def injured?
-    health < (MaxHealth * 0.50)
+    health < (MAX_HEALTH * 0.50)
   end
 
   def warning?
-    health < (MaxHealth * 0.33)
+    health < (MAX_HEALTH * 0.33)
   end
 
   def danger?
-    health < (MaxHealth * 0.25)
+    health < (MAX_HEALTH * 0.25)
   end
 
   def peril?
-    health < (MaxHealth * 0.15)
+    health < (MAX_HEALTH * 0.15)
   end
 
   # ============================================================================
   # Check sorroundings
   # ============================================================================
+
+  def enemy_around?
+    directions.find{ |direction| feel(direction).enemy? }
+  end
+
+  # ============================================================================
+  # Misc
+  # ============================================================================
+
+  def directions
+    DIRECTIONS
+  end
 end
