@@ -1,3 +1,5 @@
+require "warrior"
+
 class Player
   def play_turn(warrior)
     @warrior ||= Warrior.new

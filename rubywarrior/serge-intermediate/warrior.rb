@@ -1,6 +1,6 @@
-require 'warrior_senses'
-require 'warrior_actions'
-require 'warrior_helpers'
+require "warrior_senses"
+require "warrior_actions"
+require "warrior_helpers"
 
 class Warrior
 
@@ -16,8 +16,9 @@ class Warrior
   def go warrior
     @this = warrior
 
+    to_stairs!
 
-    @prev_health = health
+    #@prev_health = health
   end
 
   include Senses
