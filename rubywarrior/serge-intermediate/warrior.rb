@@ -5,8 +5,11 @@ require "warrior_helpers"
 class Warrior
 
   THOUGHTS = {
-    [:enemy_around?]  => :charge!,
-    :default          => :to_stairs!
+    :enemy_around?                          => :charge!,
+    :scratched?  => {
+      [:no_enemy_around?, :not_under_attack?] => :heal!
+    },
+    :default                                => :to_stairs!
   }
 
   attr_reader :this

@@ -6,4 +6,8 @@ module Actions
   def charge!
     attack!(enemy_direction)
   end
+
+  def heal!
+    rest!
+  end
 end

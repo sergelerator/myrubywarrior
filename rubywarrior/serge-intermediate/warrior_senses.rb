@@ -19,19 +19,19 @@ module Senses
   end
 
   def injured?
-    health < (MAX_HEALTH * 0.50)
+    health < (MAX_HEALTH * 0.60)
   end
 
   def warning?
-    health < (MAX_HEALTH * 0.33)
+    health < (MAX_HEALTH * 0.40)
   end
 
   def danger?
-    health < (MAX_HEALTH * 0.25)
+    health < (MAX_HEALTH * 0.20)
   end
 
   def peril?
-    health < (MAX_HEALTH * 0.15)
+    health < (MAX_HEALTH * 0.10)
   end
 
   # ============================================================================
@@ -40,6 +40,18 @@ module Senses
 
   def enemy_around?
     directions.find{ |direction| feel(direction).enemy? }
+  end
+
+  def no_enemy_around?
+    !enemy_around?
+  end
+
+  def under_attack?
+    health < prev_health
+  end
+
+  def not_under_attack?
+    !under_attack?
   end
 
   # ============================================================================
