@@ -16,6 +16,6 @@ module Helpers
   end
 
   def enemies_around
-    directions.map{ |d| feel(d).enemy? }.compact.count
+    directions.map{ |d| feel(d).enemy? }.compact.length
   end
 end

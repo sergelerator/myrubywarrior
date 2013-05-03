@@ -5,16 +5,20 @@ require "warrior_helpers"
 class Warrior
 
   THOUGHTS = {
+    :numeric_disadvantage?                  => :paralyze!,
     :enemy_around?                          => :charge!,
     :scratched?  => {
       [:no_enemy_around?, :not_under_attack?] => :heal!
     },
+    :bound_enemies?                         => :attack_bound_enemy!,
+    :captive_around?                        => :unchain!,
     :default                                => :to_stairs!
   }
 
-  attr_reader :this
+  attr_reader :this, :bound_enemies
 
   def initialize
+    @bound_enemies = []
   end
 
   def method_missing meth, *args, &b
