@@ -29,10 +29,18 @@ class Warrior
   def decide_with batch
     if batch.respond_to?(:each_pair)
       batch.each_pair do |k, v|
-
+        if k == :default
+          return method(v).call
+        elsif k.respond_to?(:map)
+          if k.map{ |name| !!method(name).call }.reduce(true, &:&)
+            return decide_with v
+          end
+        else
+          return decide_with(v) if method(k).call
+        end
       end
-    elsif batch.respond_to?(:each)
-      batch.each{ |name| method(name).call }.reduce(true, &:&)
+    elsif batch.is_a?(Symbol)
+      return method(batch).call
     end
   end
 
