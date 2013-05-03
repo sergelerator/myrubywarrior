@@ -10,4 +10,8 @@ module Actions
   def heal!
     rest!
   end
+
+  def paralyze!
+    bind!(bind_direction)
+  end
 end

@@ -7,6 +7,10 @@ module Helpers
     directions.find{ |direction| feel(direction).enemy? }
   end
 
+  def bind_direction
+    bind_directions.find{ |direction| feel(direction).enemy? }
+  end
+
   def prev_health
     @prev_health ||= health
   end

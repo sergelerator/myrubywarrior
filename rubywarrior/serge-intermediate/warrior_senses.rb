@@ -70,4 +70,8 @@ module Senses
   def directions
     DIRECTIONS
   end
+
+  def bind_directions
+    BINDING_ORDER
+  end
 end
