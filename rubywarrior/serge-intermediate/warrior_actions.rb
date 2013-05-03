@@ -19,4 +19,8 @@ module Actions
     bound_enemies.push(bind_direction)
     bind!(bind_direction)
   end
+
+  def unchain!
+    rescue!(captive_direction)
+  end
 end
