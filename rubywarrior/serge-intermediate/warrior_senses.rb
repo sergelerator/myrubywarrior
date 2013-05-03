@@ -5,6 +5,7 @@ module Senses
   # ============================================================================
   MAX_HEALTH = 20
   DIRECTIONS = [:forward, :right, :backward, :left]
+  BINDING_ORDER = [:backward, :left, :right, :forward]
 
   # ============================================================================
   # Health related senses
@@ -38,8 +39,16 @@ module Senses
   # Check sorroundings
   # ============================================================================
 
+  def sorrounded?
+    enemies_around > 2
+  end
+
+  def numeric_disadvantage?
+    enemies_around >= 2
+  end
+
   def enemy_around?
-    directions.find{ |direction| feel(direction).enemy? }
+    enemies_around >= 1
   end
 
   def no_enemy_around?

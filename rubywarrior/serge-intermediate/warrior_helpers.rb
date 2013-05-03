@@ -10,4 +10,8 @@ module Helpers
   def prev_health
     @prev_health ||= health
   end
+
+  def enemies_around
+    directions.map{ |d| feel(d).enemy? }.compact.count
+  end
 end
