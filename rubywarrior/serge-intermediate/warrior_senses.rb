@@ -71,6 +71,14 @@ module Senses
     captives_around >= 1
   end
 
+  def enemies_on_level?
+    enemies_on_level > 0
+  end
+
+  def enemies_on_level?
+    captives_on_level > 0
+  end
+
   # ============================================================================
   # Misc
   # ============================================================================

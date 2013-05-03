@@ -16,11 +16,12 @@ module Helpers
   end
 
   def bind_direction
-    bind_directions.find{ |direction| feel(direction).enemy? }
+    bind_directions.find{ |d| feel(d).enemy? }
   end
 
   def thing_direction(thing_label)
-    directions.find{ |direction| feel(direction).method(thing_label).call }
+    directions.find{ |d| feel(d).method(thing_label).call } ||
+      listen.find(&thing_label)
   end
 
   def enemies_around
@@ -32,6 +33,20 @@ module Helpers
   end
 
   def things_around(thing_label)
-    directions.map{ |d| feel(d).method(thing_label).call }.reject(&:!).length
+    #directions.map{ |d| feel(d).method(thing_label).call }.reject(&:!).length
+    directions.map{ |d| feel(d) }.count(&thing_label)
+  end
+
+
+  def enemies_on_level
+    listen.count(&:enemy?)
+  end
+
+  def captives_on_level
+    listen.count(&:captive?)
+  end
+
+  def things_on_level
+    listen.length
   end
 end

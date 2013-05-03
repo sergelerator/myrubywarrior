@@ -7,11 +7,13 @@ class Warrior
   THOUGHTS = {
     :numeric_disadvantage?                  => :paralyze!,
     :enemy_around?                          => :charge!,
-    :injured?  => {
+    :scratched?  => {
       [:no_enemy_around?, :not_under_attack?] => :heal!
     },
     :bound_enemies?                         => :attack_bound_enemy!,
     :captive_around?                        => :unchain!,
+    :enemies_on_level?                      => :approach_enemy!,
+    :captives_on_level?                     => :approach_captive!,
     :default                                => :to_stairs!
   }
 

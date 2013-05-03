@@ -3,6 +3,14 @@ module Actions
     walk!(direction_of_stairs)
   end
 
+  def approach_enemy!
+    walk!(direction_of(enemy_direction))
+  end
+
+  def approach_captive!
+    walk!(direction_of(captive_direction))
+  end
+
   def charge!
     attack!(enemy_direction)
   end
