@@ -75,7 +75,7 @@ module Senses
     enemies_on_level > 0
   end
 
-  def enemies_on_level?
+  def captives_on_level?
     captives_on_level > 0
   end
 
