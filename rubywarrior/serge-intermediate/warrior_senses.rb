@@ -7,6 +7,12 @@ module Senses
   DIRECTIONS = [:forward, :right, :backward, :left]
   BINDING_ORDER = [:backward, :left, :right, :forward]
   DODGE_PRIORITIES = [:forward, :right, :left, :backward]
+  DIRECTION_OPPOSITES = {
+    forward:    :backward,
+    backward:   :forward,
+    left:       :right,
+    right:      :left
+  }
 
   # ============================================================================
   # Health related senses
@@ -72,20 +78,12 @@ module Senses
     captives_around >= 1
   end
 
-  def explosive_captive_around?
-    explosive_captives_around >= 1
-  end
-
   def enemies_on_level?
     enemies_on_level > 0
   end
 
   def captives_on_level?
     captives_on_level > 0
-  end
-
-  def explosive_captives_on_level?
-    explosive_captives_on_level > 0
   end
 
   def path_to_enemy_blocked?
@@ -96,10 +94,27 @@ module Senses
     feel(captive_direction).stairs?
   end
 
+  # ============================================================================
+  # Dealing with explosive captives
+  # ============================================================================
+
+  def explosive_captive_around?
+    explosive_captives_around >= 1
+  end
+
+  def explosive_captives_on_level?
+    explosive_captives_on_level > 0
+  end
+
   def path_to_explosive_captive_blocked?
-    #puts "Stairs? : #{feel(explosive_captive_direction).stairs?} Enemy? : #{feel(explosive_captive_direction).enemy?}"
     feel(explosive_captive_direction).stairs? ||
       feel(explosive_captive_direction).enemy?
+  end
+
+  def dodgeable?
+    dodge_priorities.
+      reject{ |p| p == prev_spot_direction }.
+      count{ |d| d.empty? } > 0
   end
 
   # ============================================================================
@@ -116,5 +131,9 @@ module Senses
 
   def dodge_priorities
     DODGE_PRIORITIES
+  end
+
+  def direction_opposites
+    DIRECTION_OPPOSITES
   end
 end
