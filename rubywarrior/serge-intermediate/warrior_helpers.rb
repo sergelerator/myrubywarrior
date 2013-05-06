@@ -64,4 +64,8 @@ module Helpers
   def empty_spot_direction
     dodge_priorities.find{ |d| feel(d).empty? and !feel(d).stairs? }
   end
+
+  def opposite_direction_of(direction)
+    direction_opposites[direction]
+  end
 end
