@@ -40,6 +40,10 @@ module Helpers
     things_around :ticking?
   end
 
+  def enemy_ranks_around
+    directions.map{ |d| look(d) }.count{ |sight| sight.count(&:enemy?) > 1}
+  end
+
   def things_around(thing_label)
     directions.map{ |d| feel(d) }.count(&thing_label)
   end
@@ -63,6 +67,10 @@ module Helpers
 
   def empty_spot_direction
     dodge_priorities.find{ |d| feel(d).empty? and !feel(d).stairs? }
+  end
+
+  def enemy_ranks_direction
+    directions.find{ |d| look(d).count(&:enemy?) > 1 }
   end
 
   def opposite_direction_of(direction)
