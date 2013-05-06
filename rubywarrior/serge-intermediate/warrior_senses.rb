@@ -51,15 +51,19 @@ module Senses
   end
 
   def numeric_disadvantage?
-    enemies_around >= 2
+    enemies_around > 1
   end
 
   def enemy_around?
-    enemies_around >= 1
+    enemies_around > 0
   end
 
   def no_enemy_around?
     !enemy_around?
+  end
+
+  def enemy_ranks_around?
+    enemy_ranks_around > 0
   end
 
   def under_attack?
@@ -75,7 +79,7 @@ module Senses
   end
 
   def captive_around?
-    captives_around >= 1
+    captives_around > 0
   end
 
   def enemies_on_level?
