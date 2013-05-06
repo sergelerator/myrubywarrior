@@ -10,14 +10,16 @@ class Warrior
       :explosive_captive_around?              => :unchain_explosive_captive!,
       :path_to_explosive_captive_blocked?     => {
         :dodgeable?                             => :dodge_obstacle!,
+        :enemy_ranks_around?                    => :boom!,
         :default                                => :clear_path!
       },
       :default                                => :approach_explosive_captive!
     },
-    :enemy_around?                          => :charge!,
-    :scratched?  => {
-      [:no_enemy_around?, :not_under_attack?] => :heal!
+    :enemy_around?                          => {
+      :enemy_ranks_around?                    => :boom!,
+      :default                                => :charge!
     },
+    [:enemies_on_level?, :scratched?, :no_enemy_around?, :not_under_attack?] => :heal!,
     :bound_enemies?                         => :attack_bound_enemy!,
     :captive_around?                        => :unchain!,
     :enemies_on_level?                      => {
