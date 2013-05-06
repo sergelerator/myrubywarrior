@@ -8,9 +8,10 @@ class Warrior
     :numeric_disadvantage?                  => :paralyze!,
     :explosive_captives_on_level?           => {
       :explosive_captive_around?              => :unchain_explosive_captive!,
+      [:scratched?, :no_enemy_around?, :enemies_on_level?] => :heal!,
       :path_to_explosive_captive_blocked?     => {
         :dodgeable?                             => :dodge_obstacle!,
-        :enemy_ranks_around?                    => :boom!,
+        [:enemy_ranks_around?, :health_yellow?, :captives_safe_from_bombs?] => :boom!,
         :default                                => :clear_path!
       },
       :default                                => :approach_explosive_captive!
