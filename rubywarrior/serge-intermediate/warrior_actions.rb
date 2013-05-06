@@ -4,11 +4,11 @@ module Actions
   end
 
   def approach_enemy!
-    walk!(direction_of(enemy_direction))
+    walk!(enemy_direction)
   end
 
   def approach_captive!
-    walk!(direction_of(captive_direction))
+    walk!(captive_direction)
   end
 
   def charge!
@@ -30,5 +30,9 @@ module Actions
 
   def unchain!
     rescue!(captive_direction)
+  end
+
+  def dodge_obstacle!
+    walk!(empty_spot_direction)
   end
 end

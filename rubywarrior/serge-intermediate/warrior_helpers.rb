@@ -21,7 +21,7 @@ module Helpers
 
   def thing_direction(thing_label)
     directions.find{ |d| feel(d).method(thing_label).call } ||
-      listen.find(&thing_label)
+      direction_of(listen.find(&thing_label))
   end
 
   def enemies_around
@@ -33,7 +33,6 @@ module Helpers
   end
 
   def things_around(thing_label)
-    #directions.map{ |d| feel(d).method(thing_label).call }.reject(&:!).length
     directions.map{ |d| feel(d) }.count(&thing_label)
   end
 
@@ -48,5 +47,9 @@ module Helpers
 
   def things_on_level
     listen.length
+  end
+
+  def empty_spot_direction
+    directions.find{ |d| feel(d).empty? and !feel(d).stairs? }
   end
 end

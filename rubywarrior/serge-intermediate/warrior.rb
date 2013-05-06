@@ -12,8 +12,14 @@ class Warrior
     },
     :bound_enemies?                         => :attack_bound_enemy!,
     :captive_around?                        => :unchain!,
-    :enemies_on_level?                      => :approach_enemy!,
-    :captives_on_level?                     => :approach_captive!,
+    :enemies_on_level?                      => {
+      :path_to_enemy_blocked?                 => :dodge_obstacle!,
+      :default                                => :approach_enemy!
+    },
+    :captives_on_level?                     => {
+      :path_to_captive_blocked?               => :dodge_obstacle!,
+      :default                                => :approach_captive!
+    },
     :default                                => :to_stairs!
   }
 

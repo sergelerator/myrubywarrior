@@ -79,6 +79,14 @@ module Senses
     captives_on_level > 0
   end
 
+  def path_to_enemy_blocked?
+    feel(enemy_direction).stairs?
+  end
+
+  def path_to_captive_blocked?
+    feel(captive_direction).stairs?
+  end
+
   # ============================================================================
   # Misc
   # ============================================================================
