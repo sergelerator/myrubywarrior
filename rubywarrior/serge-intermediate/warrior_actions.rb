@@ -11,6 +11,10 @@ module Actions
     walk!(captive_direction)
   end
 
+  def approach_explosive_captive!
+    walk!(explosive_captive_direction)
+  end
+
   def charge!
     attack!(enemy_direction)
   end
@@ -30,6 +34,10 @@ module Actions
 
   def unchain!
     rescue!(captive_direction)
+  end
+
+  def unchain_explosive_captive!
+    rescue!(explosive_captive_direction)
   end
 
   def dodge_obstacle!

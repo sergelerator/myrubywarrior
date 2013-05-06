@@ -15,6 +15,10 @@ module Helpers
     thing_direction :captive?
   end
 
+  def explosive_captive_direction
+    thing_direction :ticking?
+  end
+
   def bind_direction
     bind_directions.find{ |d| feel(d).enemy? }
   end
@@ -32,6 +36,10 @@ module Helpers
     things_around :captive?
   end
 
+  def explosive_captives_around
+    things_around :ticking?
+  end
+
   def things_around(thing_label)
     directions.map{ |d| feel(d) }.count(&thing_label)
   end
@@ -45,11 +53,15 @@ module Helpers
     listen.count(&:captive?)
   end
 
+  def explosive_captives_on_level
+    listen.count(&:ticking?)
+  end
+
   def things_on_level
     listen.length
   end
 
   def empty_spot_direction
-    directions.find{ |d| feel(d).empty? and !feel(d).stairs? }
+    dodge_priorities.find{ |d| feel(d).empty? and !feel(d).stairs? }
   end
 end

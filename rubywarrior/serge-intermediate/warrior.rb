@@ -6,6 +6,11 @@ class Warrior
 
   THOUGHTS = {
     :numeric_disadvantage?                  => :paralyze!,
+    :explosive_captives_on_level?           => {
+      :explosive_captive_around?              => :unchain_explosive_captive!,
+      :path_to_explosive_captive_blocked?     => :dodge_obstacle!,
+      :default                                => :approach_explosive_captive!
+    },
     :enemy_around?                          => :charge!,
     :scratched?  => {
       [:no_enemy_around?, :not_under_attack?] => :heal!

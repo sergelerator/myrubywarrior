@@ -6,6 +6,7 @@ module Senses
   MAX_HEALTH = 20
   DIRECTIONS = [:forward, :right, :backward, :left]
   BINDING_ORDER = [:backward, :left, :right, :forward]
+  DODGE_PRIORITIES = [:forward, :right, :left, :backward]
 
   # ============================================================================
   # Health related senses
@@ -71,6 +72,10 @@ module Senses
     captives_around >= 1
   end
 
+  def explosive_captive_around?
+    explosive_captives_around >= 1
+  end
+
   def enemies_on_level?
     enemies_on_level > 0
   end
@@ -79,12 +84,22 @@ module Senses
     captives_on_level > 0
   end
 
+  def explosive_captives_on_level?
+    explosive_captives_on_level > 0
+  end
+
   def path_to_enemy_blocked?
     feel(enemy_direction).stairs?
   end
 
   def path_to_captive_blocked?
     feel(captive_direction).stairs?
+  end
+
+  def path_to_explosive_captive_blocked?
+    #puts "Stairs? : #{feel(explosive_captive_direction).stairs?} Enemy? : #{feel(explosive_captive_direction).enemy?}"
+    feel(explosive_captive_direction).stairs? ||
+      feel(explosive_captive_direction).enemy?
   end
 
   # ============================================================================
@@ -97,5 +112,9 @@ module Senses
 
   def bind_directions
     BINDING_ORDER
+  end
+
+  def dodge_priorities
+    DODGE_PRIORITIES
   end
 end
