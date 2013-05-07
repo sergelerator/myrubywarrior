@@ -11,6 +11,10 @@ module Helpers
     thing_direction :enemy?
   end
 
+  def bound_enemy_direction
+    direction_of(bound_enemies.last)
+  end
+
   def captive_direction
     thing_direction :captive?
   end

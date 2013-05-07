@@ -9,6 +9,11 @@ module Actions
     walk!(enemy_direction)
   end
 
+  def approach_bound_enemy!
+    prev_spot_direction = opposite_direction_of(bound_enemy_direction)
+    walk!(bound_enemy_direction)
+  end
+
   def approach_captive!
     prev_spot_direction = opposite_direction_of(captive_direction)
     walk!(captive_direction)
@@ -28,7 +33,8 @@ module Actions
   end
 
   def attack_bound_enemy!
-    attack!(bound_enemies.pop)
+    #attack!(bound_enemies.pop)
+    attack!(direction_of(bound_enemies.pop))
   end
 
   def heal!
@@ -36,7 +42,8 @@ module Actions
   end
 
   def paralyze!
-    bound_enemies.push(bind_direction)
+    #bound_enemies.push(bind_direction)
+    bound_enemies.push(feel(bind_direction))
     bind!(bind_direction)
   end
 
