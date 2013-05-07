@@ -135,7 +135,7 @@ module Senses
   end
 
   def captives_safe_from_bombs?
-    listen.select(&:ticking?).count{ |c| distance_of(c) < 2 } == 0
+    listen.select(&:ticking?).count{ |c| distance_of(c) == 2 } == 0
   end
 
   # ============================================================================
