@@ -52,4 +52,8 @@ module Actions
     prev_spot_direction = opposite_direction_of(empty_spot_direction)
     walk!(empty_spot_direction)
   end
+
+  def boom!
+    detonate!(enemy_ranks_direction)
+  end
 end
