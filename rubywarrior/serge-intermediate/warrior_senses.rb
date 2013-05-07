@@ -72,9 +72,7 @@ module Senses
   end
 
   def bound_enemy_around?
-    di = distance_of(bound_enemies.last)
-    puts di
-    di
+    distance_of(bound_enemies.last) == 1
   end
 
   def no_enemy_around?
@@ -141,7 +139,8 @@ module Senses
   end
 
   def path_to_bomb_is_clear?
-    look(explosive_captive_direction).count{ |s| s.enemy? } == 0
+    look(explosive_captive_direction).
+      count{ |s| s.enemy? || (s.captive? && !s.ticking?) } == 0
   end
 
   def captives_safe_from_bombs?
