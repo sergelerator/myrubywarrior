@@ -71,6 +71,12 @@ module Senses
     enemies_around > 0
   end
 
+  def bound_enemy_around?
+    di = distance_of(bound_enemies.last)
+    puts di
+    di
+  end
+
   def no_enemy_around?
     !enemy_around?
   end
@@ -96,7 +102,7 @@ module Senses
   end
 
   def enemies_on_level?
-    enemies_on_level > 0
+    enemies_on_level > 0 || bound_enemies?
   end
 
   def captives_on_level?
@@ -132,6 +138,10 @@ module Senses
     dodge_priorities.
       reject{ |p| p == prev_spot_direction }.
       count{ |d| d.empty? } > 0
+  end
+
+  def path_to_bomb_is_clear?
+    look(explosive_captive_direction).count{ |s| s.enemy? } == 0
   end
 
   def captives_safe_from_bombs?

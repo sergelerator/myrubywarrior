@@ -8,6 +8,7 @@ class Warrior
     :numeric_disadvantage?                  => :paralyze!,
     :explosive_captives_on_level?           => {
       :explosive_captive_around?              => :unchain_explosive_captive!,
+      :path_to_bomb_is_clear?                 => :approach_explosive_captive!,
       [:scratched?, :no_enemy_around?, :enemies_on_level?] => :heal!,
       :path_to_explosive_captive_blocked?     => {
         :dodgeable?                             => :dodge_obstacle!,
@@ -20,8 +21,13 @@ class Warrior
       :enemy_ranks_around?                    => :boom!,
       :default                                => :charge!
     },
-    [:enemies_on_level?, :scratched?, :no_enemy_around?, :not_under_attack?] => :heal!,
-    :bound_enemies?                         => :attack_bound_enemy!,
+    [:enemies_on_level?, :scratched?, :no_enemy_around?] => :heal!,
+    #:bound_enemies?                         => :attack_bound_enemy!,
+    :bound_enemies?                         => {
+      :bound_enemy_around?                    => :attack_bound_enemy!,
+      :captive_around?                        => :unchain!,
+      :default                                => :approach_bound_enemy!
+    },
     :captive_around?                        => :unchain!,
     :enemies_on_level?                      => {
       :path_to_enemy_blocked?                 => :dodge_obstacle!,
