@@ -42,6 +42,19 @@ module Senses
     health < (MAX_HEALTH * 0.10)
   end
 
+
+  def health_green?
+    health >= (MAX_HEALTH * 0.60)
+  end
+
+  def health_yellow?
+    health >= (MAX_HEALTH * 0.30)
+  end
+
+  def health_red?
+    health < (MAX_HEALTH * 0.30)
+  end
+
   # ============================================================================
   # Check sorroundings
   # ============================================================================
@@ -112,13 +125,17 @@ module Senses
 
   def path_to_explosive_captive_blocked?
     feel(explosive_captive_direction).stairs? ||
-      feel(explosive_captive_direction).enemy?
+      !feel(explosive_captive_direction).empty?
   end
 
   def dodgeable?
     dodge_priorities.
       reject{ |p| p == prev_spot_direction }.
       count{ |d| d.empty? } > 0
+  end
+
+  def captives_safe_from_bombs?
+    listen.select(&:ticking?).count{ |c| distance_of(c) == 2 } == 0
   end
 
   # ============================================================================
