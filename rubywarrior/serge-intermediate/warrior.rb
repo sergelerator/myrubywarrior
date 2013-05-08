@@ -22,7 +22,6 @@ class Warrior
       :default                                => :charge!
     },
     [:enemies_on_level?, :scratched?, :no_enemy_around?] => :heal!,
-    #:bound_enemies?                         => :attack_bound_enemy!,
     :bound_enemies?                         => {
       :bound_enemy_around?                    => :attack_bound_enemy!,
       :captive_around?                        => :unchain!,
