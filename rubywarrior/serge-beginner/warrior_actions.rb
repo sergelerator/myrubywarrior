@@ -10,4 +10,28 @@ module Actions
   def retreat!
     walk!(:backward)
   end
+
+  def walk_back!
+    walk!(:backward)
+  end
+
+  def unchain_back!
+    rescue!(:backward)
+  end
+
+  def fire!
+    shoot!
+  end
+
+  def advance!
+    walk!
+  end
+
+  def heal!
+    rest!
+  end
+
+  def turn_around!
+    pivot!
+  end
 end

@@ -6,6 +6,21 @@ class Warrior
 
   attr_reader :this
 
+  THOUGHTS = {
+    :dead_end?                              => :turn_around!,
+    :captive_behind?                        => {
+      :nothing_behind?                      => :walk_back!,
+      :default                              => :unchain_back!
+    },
+    [:danger_behind?, :nothing_in_front?]   => :advance!,
+    [:enemy_on_sight?, :nothing_in_front?]  => :fire!,
+    :should_retreat?                        => :retreat!,
+    :should_rescue?                         => :rescue_captive!,
+    :stairs_on_sight?                       => :advance!,
+    :should_rest?                           => :heal!,
+    :default                                => :charge!
+  }
+
   def initialize
   end
 
@@ -16,18 +31,31 @@ class Warrior
   def go warrior
     @this = warrior
 
-    if dead_end? then pivot!
-    elsif captive_behind? then (feel(:backward).empty? ? walk!(:backward) : rescue!(:backward))
-    elsif danger_behind? and feel.empty? then walk!
-    elsif enemy_on_sight? and feel.empty? then shoot!
-    elsif should_retreat? then retreat!
-    elsif should_rescue? then rescue_captive!
-    elsif stairs_on_sight? then walk!
-    elsif should_rest? then rest!
-    else charge!
-    end
+    decide_with thoughts
 
     @prev_health = health
+  end
+
+  def decide_with batch
+    if batch.respond_to?(:each_pair)
+      batch.each_pair do |k, v|
+        if k == :default
+          return method(v).call
+        elsif k.respond_to?(:map)
+          if k.map{ |name| !!method(name).call }.reduce(true, &:&)
+            return decide_with v
+          end
+        else
+          return decide_with(v) if method(k).call
+        end
+      end
+    elsif batch.is_a?(Symbol)
+      return method(batch).call
+    end
+  end
+
+  def thoughts
+    THOUGHTS
   end
 
   include Senses
