@@ -54,6 +54,14 @@ module Senses
     feel(:backward).empty? and danger? and under_attack?
   end
 
+  def nothing_behind?
+    feel(:backward).empty?
+  end
+
+  def nothing_in_front?
+    feel.empty?
+  end
+
   # ===============================================================================================
   # Checking near-by stuff
   # ===============================================================================================
