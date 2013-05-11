@@ -17,10 +17,7 @@ class Warrior
       },
       :default                                => :approach_explosive_captive!
     },
-    :enemy_around?                          => {
-      :enemy_ranks_around?                    => :boom!,
-      :default                                => :charge!
-    },
+    :enemy_around?                          => :charge!,
     [:enemies_on_level?, :scratched?, :no_enemy_around?] => :heal!,
     :bound_enemies?                         => {
       :bound_enemy_around?                    => :attack_bound_enemy!,
