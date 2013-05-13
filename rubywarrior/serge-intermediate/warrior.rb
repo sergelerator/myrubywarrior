@@ -18,7 +18,11 @@ class Warrior
       :default                                => :approach_explosive_captive!
     },
     :enemy_around?                          => :charge!,
-    [:enemies_on_level?, :scratched?, :no_enemy_around?] => :heal!,
+
+    [:two_plus_enemies_on_level?, :scratched?, :no_enemy_around?] => :heal!,
+    [:thick_sludge_left?, :bruised?, :no_enemy_around?] => :heal!,
+    [:enemies_on_level?, :no_thick_sludges?, :injured?, :no_enemy_around?] => :heal!,
+
     :bound_enemies?                         => {
       :bound_enemy_around?                    => :attack_bound_enemy!,
       :captive_around?                        => :unchain!,
