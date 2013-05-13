@@ -33,8 +33,9 @@ module Actions
   end
 
   def attack_bound_enemy!
-    #attack!(bound_enemies.pop)
-    attack!(direction_of(bound_enemies.pop))
+    if (bound_enemy = bound_enemy_around?)
+      attack!(direction_of(bound_enemies.delete bound_enemy))
+    end
   end
 
   def heal!
@@ -42,7 +43,6 @@ module Actions
   end
 
   def paralyze!
-    #bound_enemies.push(bind_direction)
     bound_enemies.push(feel(bind_direction))
     bind!(bind_direction)
   end

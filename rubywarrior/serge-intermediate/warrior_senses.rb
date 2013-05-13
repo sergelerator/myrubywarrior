@@ -72,7 +72,7 @@ module Senses
   end
 
   def bound_enemy_around?
-    distance_of(bound_enemies.last) == 1
+    bound_enemies.find{ |e| distance_of(e) == 1 }
   end
 
   def no_enemy_around?
