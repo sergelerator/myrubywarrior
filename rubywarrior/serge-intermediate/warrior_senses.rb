@@ -26,6 +26,10 @@ module Senses
     health < (MAX_HEALTH * 0.80)
   end
 
+  def bruised?
+    health < (MAX_HEALTH * 0.70)
+  end
+
   def injured?
     health < (MAX_HEALTH * 0.60)
   end
@@ -103,6 +107,10 @@ module Senses
     enemies_on_level > 0 || bound_enemies?
   end
 
+  def two_plus_enemies_on_level?
+    (enemies_on_level + bound_enemies.length) >= 2
+  end
+
   def captives_on_level?
     captives_on_level > 0
   end
@@ -113,6 +121,18 @@ module Senses
 
   def path_to_captive_blocked?
     feel(captive_direction).stairs?
+  end
+
+  def no_thick_sludges?
+    (listen.select(&:enemy?) + bound_enemies).none? do |e|
+      e.to_s == "Thick Sludge"
+    end
+  end
+
+  def thick_sludge_left?
+    (listen.select(&:enemy?) + bound_enemies).find do |e|
+      e.to_s == "Thick Sludge"
+    end
   end
 
   # ============================================================================
